@@ -1,6 +1,6 @@
 
 from payment_gateway_api.application.entities import Payment
-from payment_gateway_api.dtos.fields import CardNumberField, CurrencyField, CvvField, ExpiryMonthField
+from payment_gateway_api.dtos.fields import CardNumberField, CurrencyField, CvvField, ExpiryMonthField, ExpiryYearField
 from pydantic import BaseModel, Field, model_validator
 from datetime import datetime
 from uuid import uuid4
@@ -41,7 +41,7 @@ class PostPaymentDTO(BaseModel):
 
     card_number: CardNumberField
     expiry_month: ExpiryMonthField
-    expiry_year: int = Field(..., description="The expiry year of the card.")
+    expiry_year: ExpiryYearField
     cvv: CvvField
     currency: CurrencyField
     amount: int = Field(..., gt=0, description="The amount of the payment.")

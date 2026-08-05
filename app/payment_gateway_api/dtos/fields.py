@@ -1,5 +1,5 @@
 from typing import Annotated
-
+from datetime import datetime
 from pydantic import AfterValidator
 
 
@@ -20,6 +20,16 @@ def is_valid_expiry_month(month: int) -> int:
     if month < 1 or month > 12:
         raise ValueError("Expiry month must be between 1 and 12.")
     return month
+
+def is_valid_expiry_year(year: int) -> int:
+    """
+    Validates the expiry year.
+    """
+    now = datetime.now().year
+    if year < now:
+        raise ValueError("Expiry year must be the current year or later.")
+ 
+    return year
 
 def is_valid_cvv(cvv: str) -> str:
     """
@@ -42,4 +52,5 @@ def is_valid_currency(currency: str) -> str:
 CurrencyField = Annotated[str, AfterValidator(is_valid_currency)]
 CvvField = Annotated[str, AfterValidator(is_valid_cvv)]
 ExpiryMonthField = Annotated[int, AfterValidator(is_valid_expiry_month)]
+ExpiryYearField = Annotated[int, AfterValidator(is_valid_expiry_year)]
 CardNumberField = Annotated[str, AfterValidator(is_valid_card_number)]

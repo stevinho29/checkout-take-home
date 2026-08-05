@@ -1,7 +1,7 @@
 import logging
 from dataclasses import replace
 from payment_gateway_api.const import PAYMENT_STATUS_AUTHORIZED, PAYMENT_STATUS_DECLINED
-from payment_gateway_api.application.exceptions import BankUnavailable, NotFound
+from payment_gateway_api.application.exceptions import NotFound
 from payment_gateway_api.application.ports import IRepository, IBankService
 from payment_gateway_api.dtos.payment import GetPaymentDTO, PostPaymentDTO
 
