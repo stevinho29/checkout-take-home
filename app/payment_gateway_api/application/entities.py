@@ -16,5 +16,5 @@ class Payment(BaseEntity):
     currency: str
     amount: int
     cvv: str
-    status: str | None = None
+    status: STATUS_TYPE | None = None
 
