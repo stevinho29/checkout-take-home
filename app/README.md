@@ -26,7 +26,7 @@ Given the limited scope of the challenge, I intentionally avoided implementing a
 The application is split into:
 
 - Presentation: FastAPI routes and DTOs
-- Application & Domain: business use cases and orchestration
+- Application: business use cases and orchestration
 - Infrastructure: repository implementation and bank client
 - Domain(inside application folder): entities, exceptions
 
@@ -47,11 +47,6 @@ To keep the implementation focused, I deliberately made the following trade-offs
 
 # Improvements
 
-If this service were to evolve into a production system, I would consider:
+This implementation intentionally focuses on the functional requirements of the challenge.
 
-- Replacing the in-memory repository with PostgreSQL.
-- Supporting idempotency keys to prevent duplicate payments.
-- Adding structured logging, metrics and distributed tracing for observability.
-- Integrating Sentry or OpenTelemetry for production monitoring.
-- Introducing retry policies and circuit breakers for transient bank failures.
-- Managing configuration and secrets through Vault and environment-specific configuration.
+If this service were to evolve into production, several areas such as persistence, resiliency and observability would deserve further work.
