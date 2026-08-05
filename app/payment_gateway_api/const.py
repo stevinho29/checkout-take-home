@@ -1,0 +1,4 @@
+
+
+PAYMENT_STATUS_AUTHORIZED = "Authorized"
+PAYMENT_STATUS_DECLINED = "Declined"

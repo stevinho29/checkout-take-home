@@ -1,0 +1,236 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/payments": {
+      "post": {
+        "summary": "Create Payment",
+        "operationId": "create_payment_payments_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPaymentDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPaymentDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/{payment_id}": {
+      "get": {
+        "summary": "Get Payment",
+        "operationId": "get_payment_payments__payment_id__get",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Payment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPaymentDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetPaymentDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The id of the payment."
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the payment."
+          },
+          "last_four_card_digits": {
+            "type": "string",
+            "title": "Last Four Card Digits",
+            "description": "The last four digits of the card number."
+          },
+          "expiry_month": {
+            "type": "integer",
+            "title": "Expiry Month",
+            "description": "The expiry month of the card."
+          },
+          "expiry_year": {
+            "type": "integer",
+            "title": "Expiry Year",
+            "description": "The expiry year of the card."
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the payment."
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the payment."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "last_four_card_digits",
+          "expiry_month",
+          "expiry_year",
+          "currency",
+          "amount"
+        ],
+        "title": "GetPaymentDTO",
+        "description": "DTO for getting a payment."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PostPaymentDTO": {
+        "properties": {
+          "card_number": {
+            "type": "string",
+            "title": "Card Number"
+          },
+          "expiry_month": {
+            "type": "integer",
+            "title": "Expiry Month"
+          },
+          "expiry_year": {
+            "type": "integer",
+            "title": "Expiry Year",
+            "description": "The expiry year of the card."
+          },
+          "cvv": {
+            "type": "string",
+            "title": "Cvv"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "amount": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Amount",
+            "description": "The amount of the payment."
+          }
+        },
+        "type": "object",
+        "required": [
+          "card_number",
+          "expiry_month",
+          "expiry_year",
+          "cvv",
+          "currency",
+          "amount"
+        ],
+        "title": "PostPaymentDTO",
+        "description": "DTO for creating a payment."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
